@@ -1,0 +1,28 @@
+{
+  "name": "eks-sqs-s3-crud",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "ts-node-dev --transpile-only src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.0",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.6",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "drizzle-orm": "^0.44.7",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "zod": "^4.1.12"
+  }
+}
