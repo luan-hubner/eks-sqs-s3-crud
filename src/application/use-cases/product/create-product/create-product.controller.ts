@@ -7,8 +7,11 @@ import { badRequest, created, serverError } from '@src/utils/http'
 export class CreateProductController implements Controller {
   constructor(private readonly createProduct: CreateProduct) {}
 
-  async handle({ body }: HttpRequest): Promise<HttpResponse> {
-    const { success, error, data } = productSchema.safeParse(body)
+  async handle({ body, file }: HttpRequest): Promise<HttpResponse> {
+    const { success, error, data } = productSchema.safeParse({
+      ...body,
+      image: file,
+    })
 
     if (!success) {
       return badRequest({ errors: error.issues })
@@ -18,6 +21,7 @@ export class CreateProductController implements Controller {
       const product = await this.createProduct.execute({
         description: data.description,
         value: data.value,
+        image: data.image,
       })
 
       return created({ product })
