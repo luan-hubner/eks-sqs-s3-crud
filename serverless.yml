@@ -1,0 +1,33 @@
+org: haunebers
+service: eks-sqs-s3-crud
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs22.x
+  architecture: arm64
+  profile: dev
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:ReceiveMessage
+        - sqs:DeleteMessage
+        - sqs:GetQueueAttributes
+      Resource: ${env:DATABASE_URL}
+
+package:
+  individually: true
+
+build:
+  esbuild:
+    minify: true
+    sourcemap: false
+
+functions:
+  updateProductImage:
+    handler: src/functions/updateProductImage.handler
+    events:
+      - sqs:
+          arn: ${env:DATABASE_URL}

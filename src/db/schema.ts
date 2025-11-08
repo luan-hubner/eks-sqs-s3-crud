@@ -5,4 +5,5 @@ export const productsTable = pgTable('products', {
   description: varchar({ length: 255 }).notNull(),
   value: numeric('value', { precision: 5, scale: 2 }).notNull(),
   imageUrl: varchar(),
+  status: varchar({ length: 20 }),
 })

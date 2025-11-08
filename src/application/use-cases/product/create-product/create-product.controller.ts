@@ -21,11 +21,13 @@ export class CreateProductController implements Controller {
       const product = await this.createProduct.execute({
         description: data.description,
         value: data.value,
+        status: 'processing',
         image: data.image,
       })
 
       return created({ product })
     } catch (err) {
+      console.error(`error on product creation 🚨`, { err })
       return serverError()
     }
   }

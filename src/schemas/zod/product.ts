@@ -2,7 +2,7 @@ import z from 'zod'
 
 export const productSchema = z.object({
   description: z.string().min(3),
-  value: z.transform((val: string) => parseFloat(val)).refine((val) => !isNaN(val), 'Provided value is invalid.'),
+  value: z.preprocess((val) => Number(val), z.number().positive()),
   image: z
     .custom<Express.Multer.File>()
     .refine((file) => file && file.mimetype, { error: 'Product image is required.' })
