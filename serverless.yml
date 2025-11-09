@@ -15,7 +15,7 @@ provider:
         - sqs:ReceiveMessage
         - sqs:DeleteMessage
         - sqs:GetQueueAttributes
-      Resource: ${env:DATABASE_URL}
+      Resource: ${env:AWS_SQS_QUEUE_ARN}
 
 package:
   individually: true
@@ -30,4 +30,4 @@ functions:
     handler: src/functions/updateProductImage.handler
     events:
       - sqs:
-          arn: ${env:DATABASE_URL}
+          arn: ${env:AWS_SQS_QUEUE_ARN}
